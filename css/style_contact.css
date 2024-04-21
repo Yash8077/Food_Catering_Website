@@ -1,0 +1,173 @@
+
+.navbar{
+
+  z-index: 2;
+  -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.navbar-nav .nav-link {
+  font-family: "Open Sans", sans-serif;  }
+ 
+
+/* Basic Styles */
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+  background-image: url("contact.jpg"); /* Replace with your image path */
+  background-repeat: no-repeat; /* Optional: controls how the image repeats */
+  background-position: center; /* Optional: controls the position of the image */
+  background-size: cover; /* Optional: controls how the image fills the background */
+  font-family: sans-serif; /* Add your preferred font family */
+  margin: 0; /* Remove default margin */
+  padding: 0;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Main Content Styles */
+main {
+  padding-top: 50px;
+}
+
+section.get-in-touch {
+  background-color: rgba(255,255,255,0.75);
+  backdrop-filter: blur(50px);
+  border-radius: 5px;
+  padding: 50px;
+  margin: 50px;
+  box-shadow: 4px 4px 4px 4px rgba(100, 100, 100,0.5);
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.form-group {
+  width: 48%;
+  margin-bottom: 15px;
+}
+.form-groupm {
+  width: 100%;
+  margin-bottom: 15px;
+}
+.form-group1 {
+  width: 100%;
+  margin-bottom: 15px;
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+}
+
+span {
+  color: red;
+}
+
+select {
+  appearance: none;
+  /* For modern browsers */
+}
+
+.captcha {
+  width: 100%;
+}
+
+.captcha-container {
+  display: flex;
+  align-items: center;
+}
+
+.captcha img {
+  width: 100px;
+  margin-right: 10px;
+}
+
+.submit button {
+  background-color: #111;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit button:hover {
+  background-color: #000;
+}
+.google-map {
+  padding-bottom: 40%;
+  position: relative;
+  height: 50%;
+  
+}
+
+.google-map iframe {
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
+}
+
+.contact-box {
+  /* Existing styles... */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-box img {
+  margin-bottom: 10px; /* Optional spacing adjustment */
+}
+/*FOOTER CSS HERE*/
+.container.foot{
+  background-color: #111;
+  max-width: 1920px;
+  margin-right: auto;
+margin-left: auto;
+padding-right: calc(var(--bs-gutter-x) * .5);
+padding-left: calc(var(--bs-gutter-x) * .5);
+box-sizing: border-box;
+--bs-gutter-x: 1.5rem;
+--bs-gutter-y: 0;
+width: 100%;
+}
+
+
+body {
+  font-size: 16px; 
+  
+}

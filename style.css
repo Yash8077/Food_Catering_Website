@@ -1,0 +1,72 @@
+/* Style the buttons */
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .button.active {
+    background-color: #ddd;
+  }
+  
+  /* Style the pricing container */
+
+  
+  /* Style the pricing plans (individual divs) */
+
+  .col-md-4.pricing-plan {
+    border: 2px solid black;
+    border-radius: 20px;
+    width: 400px; /* Maintains consistent width */
+    padding: 40px; /* Top and bottom padding for content */
+    margin: 20px; /* Reduces margin for better spacing */
+    text-align: center; /* Aligns content in the center */
+  }
+  
+  .pricing-container {
+    width: 95%; /* Maintains container width */
+    margin: 0 auto; /* Centers the container horizontally */
+  }
+  
+  .pricing-plan h2 {
+    margin-top: 0; /* Maintains no top margin */
+  }
+  .pricing-plan-transition {
+    transition: all 0.5s ease-in-out; /* Adjust these values as needed */
+  }
+  .col-md-4.pricing-plan.pricing-plan-transition {
+    border: 2px solid black;
+    width: 200px;
+    padding: 40px;
+    padding-bottom: 200px;
+    margin: 20px;
+    text-align: center;
+  }
+    
+  
+  /* Style for screens smaller than 600px */
+  @media only screen and (max-width: 600px) {
+    .pricing-plan {
+      width: 50%;
+    }
+  }
+  
+.catering-exp{
+  width:80%;
+}
+  .container.foot{
+    background-color: #111;
+    max-width: 1920px;
+    margin-right: auto;
+  margin-left: auto;
+  padding-right: calc(var(--bs-gutter-x) * .5);
+  padding-left: calc(var(--bs-gutter-x) * .5);
+  box-sizing: border-box;
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  width: 100%;
+  }
+  
