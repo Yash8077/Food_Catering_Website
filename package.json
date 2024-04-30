@@ -1,21 +1,21 @@
 {
-  "name": "web_development_project",
+  "name": "food_catering",
   "version": "1.0.0",
-  "description": "Catering Website",
-  "main": "form.js",
+  "description": "A food catering website made for Shree Sahiram Caterers",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
-  "author": "Yash Mishra",
+  "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.20.2",
-    "connect-mongo": "^5.1.0",
-    "connect-mongodb-session": "^2.4.1",
+    "connect-mongodb-session": "^5.0.0",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "express-session": "^1.18.0",
-    "mongoose": "^8.3.1",
-    "razorpay": "^0.0.0"
+    "mongoose": "^8.3.2",
+    "razorpay": "^2.9.3"
   }
 }
