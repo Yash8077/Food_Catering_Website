@@ -25,7 +25,16 @@ html{
   background-color: #064635;
 }
 
-
+#date-of-event{
+  padding:3%;
+  border: 1px solid white;
+  width: 100%;
+}
+#time-of-event{
+  padding:3%;
+  border: 1px solid white;
+  width: 100%;
+}
 body {
   overflow-x: hidden;
   font-family: sans-serif;
