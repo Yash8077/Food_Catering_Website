@@ -3,6 +3,9 @@
 .carousel-inner{
   border-radius: 2%;
 }
+body{
+  overflow-x: hidden;
+}
 #carouselDemo{
   box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.547);
   border-radius: 2%;
