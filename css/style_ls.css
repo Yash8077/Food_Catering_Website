@@ -9,6 +9,13 @@
     background-image: url('../img/loginbg.jpg');
     background-size: cover;
 }
+.input-field span{
+    position: absolute;
+        font-size: 70%;
+        margin-top: 3rem;
+        margin-bottom: 4rem;
+        padding-bottom: 2rem;
+}
 .main{
     display: flex;
     justify-content: center;
@@ -73,6 +80,7 @@ img{
     flex-direction: column;
     position: relative;
     padding: 0 10px 0 10px;
+    margin:1rem;
 }
 .input{
     height: 45px;

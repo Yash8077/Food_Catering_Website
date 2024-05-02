@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap");
 body{
   background-color: #ffe6b3;
+  overflow-x: hidden;
 }
+
 .slider_section {
  
   display: flex;
@@ -88,6 +90,9 @@ body{
   
   margin-left: 2%;
   margin-right: 5.3%;
+}
+body{
+  overflow-x: hidden;
 }
 .text-button-container h2{
   font-size: 3rem;
@@ -430,7 +435,7 @@ background-size:cover;
 #servc3{
   animation: sliderReveal 3s ease forwards;
 }
-/*Hero Section*/
+
 .hero .slider-btn { display: none; }
 
 .hero {
@@ -439,11 +444,12 @@ background-size:cover;
   min-height: 100vh;
   overflow: hidden;
   z-index: 1;
+  top:-70px;
 }
 
 .hero .slider-item {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
@@ -472,6 +478,7 @@ background-size:cover;
   pointer-events: none;
   user-select: none;
   z-index: -1;
+  filter:blur(2px);
 }
 
 .hero .slider-item.active .slider-bg {
@@ -505,15 +512,24 @@ background-size:cover;
   margin-inline: auto;
   margin-block-end: 6px;
 }
-
-.hero-btn .span {
-  color: var(--black);
-  font-weight: var(--weight-bold);
-  text-transform: uppercase;
-  letter-spacing: var(--letterSpacing-1);
-  line-height: var(--lineHeight-3);
+.homecon{
+  position: relative;
+  left:50%;
+  transform: translate(-50%,0);
+  width:70%;
+  text-align: center;
 }
-
+#homebtn{
+  border-radius: 10px;
+  background-color: #042c2100;
+  color:white;
+  border:2px solid white;
+  font-size: 30px;
+}
+#homebtn:hover{
+  background-color: white;
+  color:rgb(0, 0, 0);
+}
 .hero-btn::after {
   inset: 0;
   border: 1px solid var(--gold-crayola);

@@ -23,25 +23,28 @@
             </div>
 
             <div class="col-md-6 right">
-                <form action="/register" method="POST">
+                <form action="/register" method="POST" onsubmit="return validateForm()">
                 <div class="input-box">
                    
                    <header>Create an Account</header>
                    <div class="input-field">
-                    <input type="text" class="input" id="username" name="username" required="" autocomplete="off">
+                    <span id="usernamespan"></span>
+                    <input type="text" class="input" id="username" name="username" required="" autocomplete="off"  onblur="checkUsername()">
                     <label for="username">Username</label> 
                 </div> 
                    <div class="input-field">
-                        <input type="email" class="input" id="email" name="email" required="" autocomplete="off">
+                    <span id="emailspan"></span>
+                        <input type="text" class="input" id="email" name="email" required="" autocomplete="off" onblur="checkEmail()">
                         <label for="email">Email</label> 
                     </div> 
                    <div class="input-field">
-                        <input type="password" class="input" id="pass" name="password" required="">
+                    <span id="passSpan"></span>
+                        <input type="password" class="input" id="pass" name="password" required="" onkeyup="checkPasswordStrength()">
                         <label for="pass">Password</label>
                     </div> 
                    <div class="input-field">
-                        
-                        <input type="submit" class="submit" value="Login">
+                    <span id="cnfpswdSpan"></span>
+                        <input type="submit" class="submit" value="Login" onkeyup="validatePassword()">
                    </div> 
                    <div class="signin">
                     <span>Already have an account? <a href="/login">Login</a></span>
@@ -52,5 +55,7 @@
         </div>
     </div>
 </div>
+
+<script src="js/validation.min.js"></script>
 </body>
 </html>
