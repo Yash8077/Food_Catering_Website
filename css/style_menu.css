@@ -5,7 +5,9 @@ body {
   background-color: #ffffff;
   overflow-x: hidden;
 }
-
+#container-fluid{
+  background-color: #064635;
+}
 .layout_padding {
   padding: 90px 0;
 }
