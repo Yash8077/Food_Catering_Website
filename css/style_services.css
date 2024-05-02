@@ -1,12 +1,33 @@
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap");
 #s1{
   font-family: 'Dancing Script',cursive;
+  color:#dbdbdb;
+  font-size: 4rem;
+}
+#s1:after{
+
+}
+#s2{
+  color:#dbdbdb;
+  font-style:italic;
+  font-size: 2rem;
+ 
+}
+.col-md-4.pricing-plan{
+  background-color: #dbdbdbc9;
+}
+.col-md-4.pricing-plan h2{
+  color:#000000;
 }
 .head{
   text-align: center;
 }
 .btns{
   text-align:center;
+}
+body{
+  background-image: url("/img/servicesbg.jpg");
+
 }
 .button {
     display: inline-block;

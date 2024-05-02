@@ -1,27 +1,40 @@
-
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap");
+html{
+  overflow-x: hidden;
+}
 .navbar{
 
   z-index: 2;
-  -webkit-transition: all 0.4s ease;
     transition: all 0.4s ease;
 }
-
+#navbarNavAltMarkup{
+  background-color: #064635;
+  text-align: center;
+  font-size: 20px;
+}
+#navbarNavAltMarkup.navbar-nav a{
+  padding: 20px;
+  color:#064635
+}
 .navbar-nav .nav-link {
   font-family: "Open Sans", sans-serif;  }
- 
+#conflu{
+  background-color: #064635;
+}
 
-/* Basic Styles */
+
 body {
+  overflow-x: hidden;
   font-family: sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f2f2f2;
-  background-image: url("contact.jpg"); /* Replace with your image path */
-  background-repeat: no-repeat; /* Optional: controls how the image repeats */
-  background-position: center; /* Optional: controls the position of the image */
-  background-size: cover; /* Optional: controls how the image fills the background */
-  font-family: sans-serif; /* Add your preferred font family */
-  margin: 0; /* Remove default margin */
+  background-image: url("contact.jpg"); 
+  background-repeat: no-repeat; 
+  background-position: center; 
+  background-size: cover; 
+  font-family: sans-serif; 
+  margin: 0; 
   padding: 0;
 }
 
@@ -90,13 +103,11 @@ textarea {
   resize: vertical;
 }
 
-span {
-  color: red;
-}
+
 
 select {
   appearance: none;
-  /* For modern browsers */
+
 }
 
 .captcha {
@@ -142,7 +153,7 @@ select {
 }
 
 .contact-box {
-  /* Existing styles... */
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -150,23 +161,103 @@ select {
 }
 
 .contact-box img {
-  margin-bottom: 10px; /* Optional spacing adjustment */
+  margin-bottom: 10px; 
 }
 /*FOOTER CSS HERE*/
-.container.foot{
-  background-color: #111;
-  max-width: 1920px;
-  margin-right: auto;
-margin-left: auto;
-padding-right: calc(var(--bs-gutter-x) * .5);
-padding-left: calc(var(--bs-gutter-x) * .5);
-box-sizing: border-box;
---bs-gutter-x: 1.5rem;
---bs-gutter-y: 0;
-width: 100%;
+
+
+.footer_section {
+  background-color:#042c21;
+  color: #ffffff;
+  padding: 75px 0 40px 0;
+  text-align: center;
+}
+
+.footer_section h4 {
+  font-size: 28px;
+}
+
+.footer_section h4 {
+  font-weight: 600;
+  margin-bottom: 20px;
+  font-family: "Dancing Script", cursive;
+}
+.footer_section .footer-logo {
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.footer_section a{
+  text-decoration: none;
+}
+.footer_section p {
+  color: #dbdbdb;
+}
+
+.footer_section .footer-col {
+  margin-bottom: 30px;
+}
+
+.footer_section .footer_contact .contact_link_box {
+
+  display: flex;
+          flex-direction: column;
+}
+
+.footer_section .footer_contact .contact_link_box a {
+  margin: 5px 0;
+  color: #ffffff;
+}
+
+.footer_section .footer_contact .contact_link_box a i {
+  margin-right: 5px;
+}
+
+.footer_section .footer_contact .contact_link_box a:hover {
+  color: #ffbe33;
+}
+
+.footer_section .footer-logo {
+  display: block;
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 1;
+  color: #ffffff;
 }
 
 
+
+
+
+.footer_section .footer-info {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.footer_section .footer-info p {
+  color: #ffffff;
+  margin: 0;
+
+}
+
+.footer_section .footer-info p a {
+  color: inherit;
+}
+
+
+.contact_link_box button{
+  width:100px;
+  padding:10px;
+  border-radius: 10px;
+  margin-bottom: 2px;
+  background-color: #064635;
+  border: 2px solid white;
+  color:white;
+}
+.contact_link_box button:hover{
+  background-color: white;
+  color:#064635;
+  transform: scale(1.05);
+}
 body {
   font-size: 16px; 
   
