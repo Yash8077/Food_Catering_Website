@@ -5,7 +5,7 @@ router.get('/',function(req, res){
         res.redirect('/home');
     }
     else{
-        res.redirect('/login');
+        res.redirect('/home');//login
     }
 });
 const isAuth = (req, res, next) => {
