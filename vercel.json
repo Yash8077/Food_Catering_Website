@@ -10,7 +10,8 @@
   "routes":[
     {
       "src": "/(.*)",
-      "dest": "app.js"
+      "dest": "/",
+      "methods": ["GET","PUT","PATCH","DELETE","OPTIONs"]
     }
   ]
 }
