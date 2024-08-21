@@ -42,45 +42,86 @@ app.get('/', (req, res) => {
 /*app.get('/login', (req, res) => {
  res.sendFile(__dirname+'/login.html')
 });*/
-app.post("/login",async (req,res)=>{
-    const { email, password } = req.body;
-    const user = await UserModel.findOne({ email });
-    if (!user) {
-        return res.redirect('/login');
-    }
+// app.post("/login",async (req,res)=>{
+//     const { email, password } = req.body;
+//     const user = await UserModel.findOne({ email });
+//     if (!user) {
+//         return res.redirect('/login');
+//     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
+//     const isMatch = await bcrypt.compare(password, user.password);
 
-    if (!isMatch) {
-      return res.redirect('/login');
-    }
-   req.session.isAuth=true;
-    res.redirect('/home');
+//     if (!isMatch) {
+//       return res.redirect('/login');
+//     }
+//    req.session.isAuth=true;
+//     res.redirect('/home');
   
+// });
+app.post("/login", async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        const user = await UserModel.findOne({ email });
+        if (!user) {
+            return res.status(401).json({ error: 'Invalid email or password' });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(401).json({ error: 'Invalid email or password' });
+        }
+
+        req.session.isAuth = true;
+        res.status(200).json({ success: true });
+    } catch (err) {
+        res.status(500).json({ error: 'Server error' });
+    }
 });
 
 /*app.get('/register', (req, res) => {
     res.sendFile(__dirname+'/sign_up.html')
 });*/
+/////////
+// app.post("/register",async (req,res)=>{
+//     const {username,email,password}=req.body;
+//     let user = await UserModel.findOne({email});
 
-app.post("/register",async (req,res)=>{
-    const {username,email,password}=req.body;
-    let user = await UserModel.findOne({email});
+//     if(user){
+//         return res.redirect("/register");
+//     }
 
-    if(user){
-        return res.redirect("/register");
+//     const hashedPsw=await bcrypt.hash(password,12);
+
+//     user =new UserModel({
+//         username,
+//         email,
+//         password: hashedPsw
+//     });
+
+//     await user.save();
+//     res.redirect("/login");
+// });
+app.post("/register", async (req, res) => {
+    const { username, email, password } = req.body;
+    try {
+        let user = await UserModel.findOne({ email });
+        if (user) {
+            return res.status(400).json({ error: 'Email already exists' });
+        }
+
+        const hashedPsw = await bcrypt.hash(password, 12);
+        user = new UserModel({
+            username,
+            email,
+            password: hashedPsw
+        });
+
+        await user.save();
+        res.status(201).json({ success: true });
+        res.redirect("/login");
+    } catch (err) {
+        res.status(500).json({ error: 'Server error' });
     }
-
-    const hashedPsw=await bcrypt.hash(password,12);
-
-    user =new UserModel({
-        username,
-        email,
-        password: hashedPsw
-    });
-
-    await user.save();
-    res.redirect("/login");
 });
 
 /*app.get('/',isAuth, (req, res) => {
