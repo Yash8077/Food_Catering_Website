@@ -2,9 +2,9 @@
   "name": "food_catering",
   "version": "1.0.0",
   "description": "A food catering website made for Shree Sahiram Caterers",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
