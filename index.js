@@ -1,129 +1,89 @@
 require("dotenv").config();
-const express = require('express');
-const bcrypt=require('bcryptjs');
-const session = require('express-session');
-const MongoDBStore = require('connect-mongodb-session')(session);
-const mongoose = require('mongoose');
-const bodyParser=require('body-parser');
+const express = require("express");
+const bcrypt = require("bcryptjs");
+const session = require("express-session");
+const MongoDBStore = require("connect-mongodb-session")(session);
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const path = require("path");
+const paymentRoute = require("./paymentRoute");
+const UserModel = require("./models/user");
+const ContactModel = require("./models/contact_form");
+const myRouterApp = require("./router");
+
 const app = express();
-const axios = require('axios');
+const PORT = process.env.PORT || 8000;
+const mongoURI = process.env.MONGO_URL;
 
-var http = require('http').Server(app);
-const path = require('path');
-app.use(express.static(path.join(__dirname, 'public')));
+// Optimize Static File Serving
+app.use(express.static(path.join(__dirname, "public"), { maxAge: "1d" }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
-const paymentRoute = require('./paymentRoute');
-
-const UserModel=require('./models/user');
-
-const userModel=require('./models/contact_form');
-
-const mongoURI=process.env.MONGO_URL;
-// Connect to MongoDB
-mongoose.connect(mongoURI, {connectTimeoutMS: 60000})
-.then((res) => console.log('MongoDB Connected'))
-.catch(err => console.error('MongoDB connection error:', err));
-app.use(bodyParser.urlencoded({extended:true}));
-app.use(express.static('./'));
-const store= new MongoDBStore({
-    uri:mongoURI,
-    collection:'userSessions',
-})
-
-app.use(session({
-  secret: 'your_secret_key_here', 
-  resave: false,
-  saveUninitialized: false,
-  store: store, 
-}));
-/*
-app.get('/', (req, res) => {
-    res.sendFile(__dirname+'/index.html')
-   });*/
-/*app.get('/login', (req, res) => {
- res.sendFile(__dirname+'/login.html')
-});*/
-app.post("/login",async (req,res)=>{
-    const { email, password } = req.body;
-    const user = await UserModel.findOne({ email });
-    if (!user) {
-        return res.redirect('/login');
-    }
-
-    const isMatch = await bcrypt.compare(password, user.password);
-
-    if (!isMatch) {
-      return res.redirect('/login');
-    }
-   req.session.isAuth=true;
-    res.redirect('/home');
-  
-});
-
-
-/*app.get('/register', (req, res) => {
-    res.sendFile(__dirname+'/sign_up.html')
-});*/
-/////////
-app.post("/register",async (req,res)=>{
-    const {username,email,password}=req.body;
-    let user = await UserModel.findOne({email});
-
-    if(user){
-        return res.redirect("/register");
-    }
-
-    const hashedPsw=await bcrypt.hash(password,12);
-
-    user =new UserModel({
-        username,
-        email,
-        password: hashedPsw
+// Async MongoDB Connection
+(async () => {
+  try {
+    await mongoose.connect(mongoURI, {
+      connectTimeoutMS: 60000,
+      serverSelectionTimeoutMS: 60000,
+      family: 4, // Force IPv4
     });
+    console.log("MongoDB Connected");
+  } catch (err) {
+    console.error("MongoDB connection error:", err);
+  }
+})();
 
-    await user.save();
-    res.redirect("/login");
+// Session Store Optimization
+const store = new MongoDBStore({
+  uri: mongoURI,
+  collection: "userSessions",
+  touchAfter: 24 * 3600, // Reduce write frequency
 });
 
-/*app.get('/',isAuth, (req, res) => {
-    res.sendFile(__dirname+'/index.html')
-   });*/
-app.post('/logout',(req,res)=>{
-    req.session.destroy((err)=>{
-        if(err)throw err;
-        res.redirect('/');
-    })
-})
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "your_secret_key_here",
+    resave: false,
+    saveUninitialized: false,
+    store,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 }, // 1 Day
+  })
+);
 
-app.post("https://api.web3forms.com/submit",function(req,res){
-    res.redirect('/submit');
-})
-app.post("/submit",function(req,res){
-    let newUser=new userModel({
-        name:req.body.name,
-        email:req.body.email,
-        phone:req.body.phone,
-        eventType:req.body.eventType,
-        dateOfEvent:req.body.dateOfEvent,
-        timeOfEvent:req.body.timeOfEvent,
-        guests:req.body.guests,
-        location:req.body.location,
-        message:req.body.message
-    });
-    newUser.save();
-    res.status(200).redirect("/home");
-});
-const myRouterApp = require('./router');
+// Routes
 app.use(myRouterApp);
-app.use('/',paymentRoute);
-/*
-const isAuth = (req,res,next)=>{
-    if(req.session.isAuth){
-        next();
-    }
-    else{
-        res.redirect('/login');
-    }
-}*/
-const PORT=process.env.PORT || 8000
-app.listen(PORT, () => console.log('Server is running'));
+app.use("/", paymentRoute);
+
+// Authentication Routes
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  const user = await UserModel.findOne({ email });
+  if (!user || !(await bcrypt.compare(password, user.password))) {
+    return res.redirect("/login");
+  }
+  req.session.isAuth = true;
+  res.redirect("/home");
+});
+
+app.post("/register", async (req, res) => {
+  const { username, email, password } = req.body;
+  if (await UserModel.findOne({ email })) return res.redirect("/register");
+  const hashedPsw = await bcrypt.hash(password, 12);
+  await new UserModel({ username, email, password: hashedPsw }).save();
+  res.redirect("/login");
+});
+
+app.post("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) return res.status(500).send("Logout failed");
+    res.redirect("/");
+  });
+});
+
+// Contact Form Submission
+app.post("/submit", async (req, res) => {
+  await new ContactModel(req.body).save();
+  res.redirect("/home");
+});
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

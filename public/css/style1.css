@@ -404,10 +404,9 @@ background-size:cover;
 #test_head{
   font-family: "Dancing Script",cursive;
   font-size: 3rem;
-  color:white;
+  color:#064635;
 }
 #testimonials{
-  background-image: url('testimonial.webp');
   padding-left: 5%;
   padding-right:5%;
   padding-bottom:7%;

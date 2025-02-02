@@ -1,59 +1,28 @@
 const express = require("express");
+const path = require("path");
 const router = express.Router();
-router.get('/',function(req, res){
-    if(req.session.isAuth){
-        res.redirect('/home');
-    }
-    else{
-        res.redirect('/login');//login
-    }
-});
+
 const isAuth = (req, res, next) => {
-    if(req.session.isAuth){
-        next();
+    if (req.session.isAuth) {
+        return next();
     }
-    else{
-        res.redirect('/login');//login
-    }
-}
+    res.redirect("/login");
+};
 
-router.get('/home',isAuth,function(req, res){
-    res.sendFile(__dirname + "/home.html");
+router.get("/", (req, res) => {
+    res.redirect(req.session.isAuth ? "/home" : "/login");
 });
 
-router.get('/landing', function(req, res){
-    res.sendFile(__dirname + "/landing.html");
-});
-router.get('/about', function(req, res){
-    res.sendFile(__dirname + "/about.html");
-});
-router.get('/contact', function(req, res){
-    res.sendFile(__dirname + "/contact.html");
-});
-router.get('/gallery', function(req, res){
-    res.sendFile(__dirname + "/gallery.html");
-});
-router.get('/home', function(req, res){
-    res.sendFile(__dirname + "/index.html");
-});
-router.get('/services', function(req, res){
-    res.sendFile(__dirname + "/services.html");
-});
-router.get('/menu', function(req, res){
-    res.sendFile(__dirname + "/menu.html");
-});
-router.get('/login', function(req, res){
-    if(req.session.isAuth){
-        res.redirect('/home')
-    }
-    res.sendFile(__dirname + "/login.html");
-});
-router.get('/',function(req, res){
-        res.redirect('/login');
-});
-router.get('/register', function(req, res){
-    res.sendFile(__dirname + "/signup.html");
+router.get("/home", isAuth, (req, res) => {
+    res.sendFile(path.join(__dirname, "home.html"));
 });
 
+const pages = ["landing", "about", "contact", "gallery", "services", "menu", "register", "login"];
+
+pages.forEach(page => {
+    router.get(`/${page}`, (req, res) => {
+        res.sendFile(path.join(__dirname, `${page}.html`));
+    });
+});
 
 module.exports = router;
