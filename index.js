@@ -20,7 +20,7 @@ const userModel=require('./models/contact_form');
 
 const mongoURI=process.env.MONGO_URL;
 // Connect to MongoDB
-mongoose.connect(mongoURI)
+mongoose.connect(mongoURI, {connectTimeoutMS: 60000})
 .then((res) => console.log('MongoDB Connected'))
 .catch(err => console.error('MongoDB connection error:', err));
 app.use(bodyParser.urlencoded({extended:true}));
